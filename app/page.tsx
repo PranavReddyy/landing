@@ -19,6 +19,8 @@ import {
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
+import { useEffect, useState } from 'react'
+
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -40,12 +42,70 @@ const TRANSITION_SECTION = {
 }
 
 type ProjectVideoProps = {
-  src?: string
+  src?: string;
+  link?: string; // Add this line
 }
 
-function ProjectVideo({ src }: ProjectVideoProps) {
+function ProjectVideo({ src, link }: ProjectVideoProps) {
   if (!src) return null;
 
+  // Server-side rendering check and mobile detection
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+
+    const checkIfMobile = () => {
+      // Check for mobile browser via user agent (more reliable than just width)
+      const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+      const isMobileDevice = mobileRegex.test(navigator.userAgent) || window.innerWidth < 768;
+      setIsMobile(isMobileDevice);
+    };
+
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  // Don't render anything until after client-side hydration
+  if (!mounted) return null;
+
+  // For mobile devices, make video clickable if link is provided
+  if (isMobile) {
+    const videoElement = (
+      <video
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        disablePictureInPicture
+        className="aspect-video w-full rounded-xl"
+        controls={false}
+      />
+    );
+
+    // If link is provided, make it clickable
+    if (link) {
+      return (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block cursor-pointer" // Make it clickable
+        >
+          {videoElement}
+        </a>
+      );
+    }
+
+    // No link, just show the video
+    return <div>{videoElement}</div>;
+  }
+
+  // Desktop only - dialog with video trigger
   return (
     <MorphingDialog
       transition={{
@@ -60,6 +120,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
           autoPlay
           loop
           muted
+          playsInline
           className="aspect-video w-full cursor-zoom-in rounded-xl"
         />
       </MorphingDialogTrigger>
@@ -70,6 +131,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
             autoPlay
             loop
             muted
+            playsInline
             className="aspect-video h-[40vh] w-full rounded-xl md:h-[70vh]"
           />
         </MorphingDialogContent>
@@ -88,7 +150,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
         </MorphingDialogClose>
       </MorphingDialogContainer>
     </MorphingDialog>
-  )
+  );
 }
 
 function MagneticSocialLink({
@@ -183,7 +245,7 @@ export default function Personal() {
                   {/* Small/Medium screen version (positioned above) */}
                   {project.video && (
                     <div className="block lg:hidden mb-4 rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-                      <ProjectVideo src={project.video} />
+                      <ProjectVideo src={project.video} link={project.link} />
                     </div>
                   )}
 
