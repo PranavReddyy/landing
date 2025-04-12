@@ -1,8 +1,8 @@
 type Project = {
   name: string
   description: string
-  link: string
-  video: string
+  link?: string
+  video?: string
   id: string
 }
 
@@ -29,50 +29,115 @@ type SocialLink = {
 
 export const PROJECTS: Project[] = [
   {
-    name: 'Motion Primitives Pro',
+    name: 'Stock Trading Simulator',
     description:
-      'Advanced components and templates to craft beautiful websites.',
-    link: 'https://pro.motion-primitives.com/',
-    video:
-      'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA0',
+      'Simulated stock market for 400+ students where university clubs acted as companies. Built with Next.js, Firebase, and WebSockets with local engines for real-time matching. Companies could post news, and admins had control over market conditions.',
+    link: 'https://mcse.vercel.app',
+    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744383071/mcse_apahbz.mp4',
     id: 'project1',
   },
   {
-    name: 'Motion Primitives',
-    description: 'UI kit to make beautiful, animated interfaces.',
-    link: 'https://motion-primitives.com/',
-    video:
-      'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/XSfIvT7BUWbPRXhrbLed/ee6871c9-8400-49d2-8be9-e32675eabf7e.mp4?_a=DATAdtAAZAA0',
+    name: 'Math Club Website',
+    description:
+      'Full-stack Next.js site for the Math Club with a custom backend-powered blog. Designed, developed, and maintained to boost engagement and event visibility.',
+    link: 'https://mathsoc.club',
+    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744493689/mathsocfinal_cmrzwm.mp4',
     id: 'project2',
+  },
+  {
+    name: 'The Echo – University Newspaper Website',
+    description:
+      'Modern, full-featured platform for the official university newspaper. Built with Next.js and Firebase, it includes a sleek reading experience, anonymous article submissions, and a powerful admin dashboard to manage 200+ articles, events, and contributors. Also serves as a central hub for all campus happenings.',
+    link: 'https://theechomu.vercel.app',
+    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744493687/echofinal_xh936w.mp4',
+    id: 'project9',
+  },
+  {
+    name: 'Stalls at Fest – Food Ordering Platform',
+    description:
+      'Ongoing platform for ordering from temporary food stalls at university events. Built with Next.js, Firebase, and Redis. Users can book food, while stalls manage orders, stock, and view real-time statistics. Admin dashboard provides analytics and control.',
+    link: 'https://aeonstalls.vercel.app',
+    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744413847/stallsatfest_ekpxrp.mov',
+    id: 'project8',
+  },
+  {
+    name: 'Moodora – Mood Tracking App',
+    description:
+      'Next.js and Firebase-based app to track user moods over time. Features smooth UI, interactive charts, and persistent user history.',
+    link: 'https://moodora.vercel.app',
+    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744383058/moodora_ntycqf.mov',
+    id: 'project3',
+  },
+  {
+    name: 'COVID-19 Regression Analysis',
+    description:
+      'Explored 10k+ case records using Polynomial and Ridge Regression to predict trends. Evaluated using MSE and visualized insights via Matplotlib.',
+    link: 'https://github.com/PranavReddyy/COVID-19-Regression-Analysis',
+    id: 'project4',
+  },
+  {
+    name: 'Diabetes Prediction Model',
+    description:
+      'KNN-based model on the Pima dataset with EDA, preprocessing, and evaluation via confusion matrix and classification metrics.',
+    link: 'https://github.com/PranavReddyy/Diabetes-Prediction-Model',
+    id: 'project5',
+  },
+  {
+    name: 'Caffeinatic – Coffee Tracking App',
+    description:
+      'React and Firebase app to log daily caffeine intake. Tracks trends over time with real-time updates and clean, mobile-friendly UI.',
+    link: 'https://caffeinatic.netlify.app',
+    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744383057/caffeinatic_fg0oev.mov',
+    id: 'project6',
+  },
+  {
+    name: 'AI/ML Assignments & Implementations',
+    description:
+      'Collection of core ML implementations done during the IIITH AIML program — includes clustering, regression, and deep learning fundamentals.',
+    link: 'https://github.com/PranavReddyy/Labs-IIITH',
+    id: 'project7',
   },
 ]
 
+
+
+
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Reglazed Studio',
-    title: 'CEO',
-    start: '2024',
+    company: 'Mathematics Society, Mahindra University',
+    title: 'Head of Tech & Design',
+    start: 'Aug. 2024',
     end: 'Present',
-    link: 'https://ibelick.com',
-    id: 'work1',
+    link: 'https://www.linkedin.com/company/mathematics-club-mu/',
+    id: 'work3',
   },
   {
-    company: 'Freelance',
-    title: 'Design Engineer',
-    start: '2022',
-    end: '2024',
-    link: 'https://ibelick.com',
+    company: 'The Echo, University Paper',
+    title: 'Head of Tech',
+    start: 'Aug. 2024',
+    end: 'Present',
+    link: 'https://www.linkedin.com/company/the-echo-mu/',
+    id: 'work4',
+  },
+  {
+    company: 'Hacktoberfest 2024',
+    title: 'Contributor – Phishing Site Detection',
+    start: 'Oct. 2024',
+    end: 'Oct. 2024',
+    link: 'https://github.com/MU-Enigma/BotForge/tree/master/Level3/PranavReddyyy',
     id: 'work2',
   },
   {
-    company: 'Freelance',
-    title: 'Front-end Developer',
-    start: '2017',
+    company: 'Self Employed',
+    title: 'Freelance Designer/Web Developer',
+    start: 'Aug. 2023',
     end: 'Present',
-    link: 'https://ibelick.com',
-    id: 'work3',
+    link: 'https://github.com/PranavReddyy',
+    id: 'work1',
   },
 ]
+
+
 
 export const BLOG_POSTS: BlogPost[] = [
   {
@@ -100,20 +165,20 @@ export const BLOG_POSTS: BlogPost[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'Github',
-    link: 'https://github.com/ibelick',
+    link: 'https://github.com/PranavReddyy',
   },
   {
     label: 'Twitter',
-    link: 'https://twitter.com/ibelick',
+    link: 'https://x.com/0xPranavReddy',
   },
   {
     label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/ibelick',
+    link: 'https://www.linkedin.com/in/pranavreddymitta/',
   },
   {
     label: 'Instagram',
-    link: 'https://www.instagram.com/ibelick',
+    link: 'https://www.instagram.com/pranavreddy.m/',
   },
 ]
 
-export const EMAIL = 'your@email.com'
+export const EMAIL = 'pranavreddymitta@gmail.com'

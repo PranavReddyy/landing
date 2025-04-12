@@ -70,10 +70,11 @@ export function Footer() {
   return (
     <footer className="mt-24 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
       <div className="flex items-center justify-between">
-        <a href="https://github.com/ibelick/nim" target="_blank">
+        <a href="https://github.com/PranavReddyy" target="_blank">
           <TextLoop className="text-xs text-zinc-500">
-            <span>© 2024 Nim.</span>
-            <span>Built with Motion-Primitives.</span>
+            <span>© 2025 Pranav Reddy Mitta.</span>
+            <span>Built with Thought.</span>
+            <span>Grateful for the chaos and clarity.</span>
           </TextLoop>
         </a>
         <div className="text-xs text-zinc-400">
