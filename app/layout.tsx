@@ -16,7 +16,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'Pranav Reddy Mitta',
   description:
-    'Nim is a free and open-source personal website template built with Next.js 15, React 19 and Motion-Primitives.',
+    'Designer and developer connecting the dots between interfaces and intelligence. Building thoughtful digital experiences through code, design, and AI.',
 }
 
 const geist = Geist({
