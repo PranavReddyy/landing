@@ -125,14 +125,14 @@ function ProjectVideo({ src, link }: ProjectVideoProps) {
         />
       </MorphingDialogTrigger>
       <MorphingDialogContainer>
-        <MorphingDialogContent className="relative aspect-video rounded-2xl bg-zinc-50 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50">
+        <MorphingDialogContent className="relative max-w-5xl mx-auto aspect-video rounded-2xl bg-zinc-50 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950 dark:ring-zinc-800/50 flex items-center justify-center">
           <video
             src={src}
             autoPlay
             loop
             muted
             playsInline
-            className="aspect-video h-[40vh] w-full rounded-xl md:h-[70vh]"
+            className="aspect-video w-full h-auto rounded-xl object-contain"
           />
         </MorphingDialogContent>
         <MorphingDialogClose
