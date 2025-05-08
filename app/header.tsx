@@ -46,7 +46,7 @@ export function Header() {
 
         <Magnetic springOptions={{ bounce: 0 }} intensity={0.2}>
           <a
-            href="https://drive.google.com/file/d/1t3XBOx93yL8K6bfe01h37aUTYJ27Jake/view?usp=sharing"
+            href="https://drive.google.com/file/d/1GARXpGb11yEG9ikTVD8yS0IZ5JbrBG0k/view?usp=share_link"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-1 text-sm font-medium text-zinc-800 transition-colors duration-200 hover:text-black dark:text-zinc-400 dark:hover:text-white"

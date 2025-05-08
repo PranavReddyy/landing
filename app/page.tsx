@@ -19,7 +19,7 @@ import {
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 
 const VARIANTS_CONTAINER = {
@@ -49,15 +49,17 @@ type ProjectVideoProps = {
 function ProjectVideo({ src, link }: ProjectVideoProps) {
   if (!src) return null;
 
-  // Server-side rendering check and mobile detection
+  // States for loading and visibility
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setMounted(true);
 
     const checkIfMobile = () => {
-      // Check for mobile browser via user agent (more reliable than just width)
       const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
       const isMobileDevice = mobileRegex.test(navigator.userAgent) || window.innerWidth < 768;
       setIsMobile(isMobileDevice);
@@ -69,43 +71,73 @@ function ProjectVideo({ src, link }: ProjectVideoProps) {
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
-  // Don't render anything until after client-side hydration
-  if (!mounted) return null;
+  // Set up intersection observer for lazy loading
+  useEffect(() => {
+    if (!mounted) return;
 
-  // For mobile devices, make video clickable if link is provided
-  if (isMobile) {
-    const videoElement = (
-      <video
-        src={src}
-        autoPlay
-        loop
-        muted
-        playsInline
-        disablePictureInPicture
-        className="aspect-video w-full rounded-xl"
-        controls={false}
-      />
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
     );
 
-    // If link is provided, make it clickable
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [mounted]);
+
+  if (!mounted) return null;
+
+  // Loading placeholder
+  const placeholder = (
+    <div className="aspect-video w-full rounded-xl bg-zinc-200 dark:bg-zinc-800 animate-pulse" />
+  );
+
+  // For mobile devices with optional link
+  if (isMobile) {
+    const videoElement = (
+      <>
+        {!isLoaded && placeholder}
+        <video
+          ref={videoRef}
+          src={isVisible ? src : undefined}
+          autoPlay={isVisible}
+          loop
+          muted
+          playsInline
+          disablePictureInPicture
+          className={`aspect-video w-full rounded-xl ${!isLoaded ? 'opacity-0 absolute' : 'opacity-100'}`}
+          controls={false}
+          onLoadedData={() => setIsLoaded(true)}
+          preload="auto"
+        />
+      </>
+    );
+
+    // If link is provided, make video clickable
     if (link) {
       return (
         <a
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="block cursor-pointer" // Make it clickable
+          className="block cursor-pointer relative"
         >
           {videoElement}
         </a>
       );
     }
 
-    // No link, just show the video
-    return <div>{videoElement}</div>;
+    return <div className="relative">{videoElement}</div>;
   }
 
-  // Desktop only - dialog with video trigger
+  // Desktop version with dialog
   return (
     <MorphingDialog
       transition={{
@@ -114,14 +146,18 @@ function ProjectVideo({ src, link }: ProjectVideoProps) {
         duration: 0.3,
       }}
     >
-      <MorphingDialogTrigger>
+      <MorphingDialogTrigger className="relative">
+        {!isLoaded && placeholder}
         <video
-          src={src}
-          autoPlay
+          ref={videoRef}
+          src={isVisible ? src : undefined}
+          autoPlay={isVisible}
           loop
           muted
           playsInline
-          className="aspect-video w-full cursor-zoom-in rounded-xl"
+          className={`aspect-video w-full cursor-zoom-in rounded-xl ${!isLoaded ? 'opacity-0 absolute' : 'opacity-100'}`}
+          onLoadedData={() => setIsLoaded(true)}
+          preload="auto"
         />
       </MorphingDialogTrigger>
       <MorphingDialogContainer>
@@ -215,7 +251,15 @@ export default function Personal() {
         transition={TRANSITION_SECTION}
         className="px-1 md:px-0"
       >
-        <h3 className="mb-3 text-lg font-medium">Projects</h3>
+        <div className="flex justify-between items-center mb-3">
+          <h3 className="text-lg font-medium">Featured Projects</h3>
+          <Link
+            href="/projects"
+            className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+          >
+            View all projects →
+          </Link>
+        </div>
         <div className="flex flex-col space-y-0">
           <AnimatedBackground
             enableHover
@@ -226,7 +270,7 @@ export default function Personal() {
               duration: 0.2,
             }}
           >
-            {PROJECTS.map((project) => (
+            {PROJECTS.filter(project => project.featured).map((project) => (
               <div
                 key={project.id}
                 className="group -mx-3 rounded-xl px-3 py-3 relative"
@@ -374,3 +418,4 @@ export default function Personal() {
     </motion.main>
   )
 }
+

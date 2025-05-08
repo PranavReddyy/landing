@@ -4,6 +4,7 @@ type Project = {
   link?: string
   video?: string
   id: string
+  featured?: boolean
 }
 
 type WorkExperience = {
@@ -33,31 +34,43 @@ export const PROJECTS: Project[] = [
     description:
       'Simulated stock market for 400+ students where university clubs acted as companies. Built with Next.js, Firebase, and WebSockets with local engines for real-time matching. Companies could post news, and admins had control over market conditions.',
     link: 'https://mcse.vercel.app',
-    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744383071/mcse_apahbz.mp4',
+    video: '/videos/mcse.mp4',
     id: 'project1',
+    featured: true,
+  },
+  {
+    name: 'Genovate – ChatGPT for Human Proteins',
+    description:
+      'Genovate is a bioinformatics web app that won 3rd place at a 48-hour hackathon. It delivers real-time insights on human genes and proteins—covering function, structure, diseases, drugs, and interactions—via a clean, ChatGPT-style interface. Built with Next.js, Express.js, and n8n, it integrates data from UniProt, PDB, DisGeNET, DrugBank, and STRING.',
+    link: 'https://genovate.vercel.app',
+    video: '/videos/genovate.mp4',
+    id: 'project10',
+    featured: true,
   },
   {
     name: 'Math Club Website',
     description:
       'Full-stack Next.js site for the Math Club with a custom backend-powered blog. Designed, developed, and maintained to boost engagement and event visibility.',
     link: 'https://mathsoc.club',
-    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744493689/mathsocfinal_cmrzwm.mp4',
+    video: '/videos/mathsoc.mp4',
     id: 'project2',
+    featured: true,
   },
   {
     name: 'The Echo – University Newspaper Website',
     description:
       'Modern, full-featured platform for the official university newspaper. Built with Next.js and Firebase, it includes a sleek reading experience, anonymous article submissions, and a powerful admin dashboard to manage 200+ articles, events, and contributors. Also serves as a central hub for all campus happenings.',
     link: 'https://theechomu.vercel.app',
-    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744493687/echofinal_xh936w.mp4',
+    video: '/videos/echo.mp4',
     id: 'project9',
+    featured: true,
   },
   {
     name: 'Stalls at Fest – Food Ordering Platform',
     description:
       'Ongoing platform for ordering from temporary food stalls at university events. Built with Next.js, Firebase, and Redis. Users can book food, while stalls manage orders, stock, and view real-time statistics. Admin dashboard provides analytics and control.',
     link: 'https://aeonstalls.vercel.app',
-    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744413847/stallsatfest_ekpxrp.mov',
+    video: 'videos/stalls.mov',
     id: 'project8',
   },
   {
@@ -65,7 +78,7 @@ export const PROJECTS: Project[] = [
     description:
       'Next.js and Firebase-based app to track user moods over time. Features smooth UI, interactive charts, and persistent user history.',
     link: 'https://moodora.vercel.app',
-    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744383058/moodora_ntycqf.mov',
+    video: '/videos/moodora.mov',
     id: 'project3',
   },
   {
@@ -87,7 +100,7 @@ export const PROJECTS: Project[] = [
     description:
       'React and Firebase app to log daily caffeine intake. Tracks trends over time with real-time updates and clean, mobile-friendly UI.',
     link: 'https://caffeinatic.netlify.app',
-    video: 'https://res.cloudinary.com/dknefj2hu/video/upload/v1744383057/caffeinatic_fg0oev.mov',
+    video: '/videos/caffeinatic.mov',
     id: 'project6',
   },
   {
